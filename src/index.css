@@ -1,0 +1,271 @@
+@import '@fontsource/dm-sans/300.css';
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-serif-display/400.css';
+@import '@fontsource/dm-serif-display/400-italic.css';
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #000000;
+  --surface: #111111;
+  --surface2: #1a1a1a;
+  --border: rgba(255,255,255,0.08);
+  --surface: #111118;
+  --surface2: #1a1a24;
+  --border: rgba(255,255,255,0.07);
+  --text: #f0f0f5;
+  --text-muted: rgba(240,240,245,0.4);
+  --text-dim: rgba(240,240,245,0.65);
+  --accent: #c8f55a;
+  --accent-dim: rgba(200,245,90,0.12);
+  --accent-glow: rgba(200,245,90,0.25);
+  --blue: #5c9eff;
+  --purple: #a78bfa;
+  --red: #ff5c5c;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 2px; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Мобильный нижний бар */
+.bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .greeting {
+    font-size: 26px !important;
+    line-height: 1.2 !important;
+  }
+
+  .sidebar {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    padding: 24px 16px 180px 16px !important;
+    max-width: 100% !important;
+    flex: 1 !important;
+  }
+
+  /* Header на мобильных */
+  .main-content > div:first-child {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .main-content > div:first-child > div:last-child {
+    align-self: flex-start !important;
+  }
+
+  .right-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 24px 0 0 0 !important;
+    gap: 16px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 72px;
+    background: rgba(17,17,24,0.97);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    align-items: center;
+    justify-content: space-around;
+    z-index: 1000;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 500;
+    font-family: 'inter', sans-serif;
+  }
+
+  .bottom-nav-item.active { color: var(--accent); }
+  .bottom-nav-item span { font-size: 22px; }
+}
+/* Улучшенные карточки с 3D тенями */
+:root {
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.5);
+  --shadow-xl: 0 12px 40px rgba(0,0,0,0.6);
+  
+  /* Эффект глубины с внутренней тенью и свечением */
+  --shadow-card: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  --shadow-elevated: 0 12px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
+  --shadow-deep: 0 15px 50px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05);
+  
+  /* Цветные свечения */
+  --shadow-accent: 0 4px 24px rgba(200,245,90,0.15);
+  --shadow-accent-lg: 0 0 25px rgba(200,245,90,0.08);
+  --shadow-blue: 0 4px 24px rgba(92,158,255,0.15);
+  --shadow-blue-lg: 0 0 25px rgba(92,158,255,0.08);
+  --shadow-purple: 0 4px 24px rgba(168,139,250,0.15);
+  --shadow-red: 0 4px 24px rgba(255,92,92,0.15);
+  
+  /* Интерактивные эффекты */
+  --shadow-interactive: 0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+  --shadow-hover: 0 10px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
+  --shadow-active: 0 12px 40px rgba(0,0,0,0.7), inset 0 2px 4px rgba(255,255,255,0.02);
+}
+
+/* Классы для разных типов карточек */
+.card {
+  box-shadow: var(--shadow-card);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-elevated);
+}
+
+.card-deep {
+  box-shadow: var(--shadow-deep);
+}
+
+.card-glow {
+  box-shadow: var(--shadow-elevated), var(--shadow-accent-lg);
+}
+
+.card-glow-blue {
+  box-shadow: var(--shadow-elevated), var(--shadow-blue-lg);
+}
+
+.card-interactive {
+  box-shadow: var(--shadow-interactive);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card-interactive:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+.card-interactive:active {
+  box-shadow: var(--shadow-active);
+  transform: translateY(-2px);
+}
+
+/* Глобальные стили для всех элементов - переопределяем все конкретные box-shadow значения */
+
+/* Переопределяем все возможные конкретные значения теней */
+[style*="0 2px 8px"] {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+[style*="0 4px 24px"] {
+  box-shadow: var(--shadow-md) !important;
+}
+
+[style*="0 10px 30px"] {
+  box-shadow: var(--shadow-card) !important;
+}
+
+[style*="0 12px 40px"] {
+  box-shadow: var(--shadow-elevated) !important;
+}
+
+[style*="0 15px 50px"] {
+  box-shadow: var(--shadow-deep) !important;
+}
+
+[style*="0 8px 24px"] {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+[style*="0 6px 20px"] {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Переводим все на переменные */
+div, button {
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+button {
+  transition: box-shadow 0.3s ease, transform 0.2s ease !important;
+}
+
+button:hover {
+  box-shadow: var(--shadow-hover) !important;
+}
+
+/* Базовые карточки */
+div[style*="borderRadius: '20px'"] {
+  box-shadow: var(--shadow-card) !important;
+}
+
+div[style*="borderRadius: '24px'"] {
+  box-shadow: var(--shadow-elevated) !important;
+}
+
+div[style*="borderRadius: '16px'"] {
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Плавные переходы между страницами */
+.page-enter {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Hover эффекты на карточках */
+[style*="cursor: pointer"]:hover {
+  transform: translateY(-1px) !important;
+  transition: transform 0.15s ease !important;
+}
+
+/* Нижний бар — активная иконка с точкой */
+.bottom-nav-item.active::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin: 2px auto 0;
+}
