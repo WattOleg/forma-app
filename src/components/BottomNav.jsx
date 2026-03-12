@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const icons = {
@@ -56,6 +57,20 @@ const tabs = [
 export default function BottomNav() {
   const navigate = useNavigate()
   const location = useLocation()
+  const [compact, setCompact] = useState(false)
+
+  useEffect(() => {
+    const updateCompact = () => {
+      if (typeof window === 'undefined') return
+      setCompact(window.innerWidth <= 400)
+    }
+
+    updateCompact()
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateCompact)
+      return () => window.removeEventListener('resize', updateCompact)
+    }
+  }, [])
 
   return (
     <div style={{
@@ -91,17 +106,21 @@ export default function BottomNav() {
             transition: 'opacity 0.15s',
           }}>
             {icons[tab.icon](active)}
-            <span style={{
-              fontSize: '9px',
-              fontWeight: 500,
-              letterSpacing: '-0.1px',
-              color: active ? '#c8f55a' : 'rgba(255,255,255,0.4)',
-              fontFamily: 'Inter, sans-serif',
-              maxWidth: '100%',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            }}>{tab.label}</span>
+            {!compact && (
+              <span style={{
+                fontSize: '9px',
+                fontWeight: 500,
+                letterSpacing: '-0.1px',
+                color: active ? '#c8f55a' : 'rgba(255,255,255,0.4)',
+                fontFamily: 'Inter, sans-serif',
+                maxWidth: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}>
+                {tab.label}
+              </span>
+            )}
           </div>
         )
       })}
