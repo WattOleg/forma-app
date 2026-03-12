@@ -160,7 +160,7 @@ export default function Exercises() {
               }}>{f.label}</span>
             </div>
           )
-        }}
+        })}
       </div>
 
       <div style={{ padding: '0 16px 12px', fontSize: '13px', color: 'rgba(255,255,255,0.3)' }}>
