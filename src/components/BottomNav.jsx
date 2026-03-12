@@ -92,11 +92,15 @@ export default function BottomNav() {
           }}>
             {icons[tab.icon](active)}
             <span style={{
-              fontSize: '10px',
+              fontSize: '9px',
               fontWeight: 500,
               letterSpacing: '-0.1px',
               color: active ? '#c8f55a' : 'rgba(255,255,255,0.4)',
-              fontFamily: 'Inter, sans-serif'
+              fontFamily: 'Inter, sans-serif',
+              maxWidth: '100%',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap'
             }}>{tab.label}</span>
           </div>
         )
