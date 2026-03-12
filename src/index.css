@@ -6,6 +6,11 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+button, a, [role="button"], input[type="checkbox"], input[type="radio"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
 :root {
   --bg: #000000;
   --surface: #111111;
@@ -25,12 +30,23 @@
   --red: #ff5c5c;
 }
 
+/* Apply max-width constraint to page containers on larger screens */
+@media (min-width: 769px) {
+  [style*="minHeight: '100vh'"],
+  [style*="paddingBottom: '100px'"],
+  [style*="paddingBottom: '160px'"] {
+    max-width: 430px;
+    margin: 0 auto;
+  }
+}
+
 body {
 font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   background: var(--bg);
   color: var(--text);
   margin: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::-webkit-scrollbar { width: 4px; }

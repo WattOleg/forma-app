@@ -138,29 +138,29 @@ export default function Exercises() {
       </div>
 
       {/* Фильтры */}
-      <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', padding: '4px 16px 16px', scrollbarWidth: 'none' }}>
+      <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', padding: '4px 16px 16px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
         {muscleFilters.map(f => {
           const active = activeGroup === f.id
           return (
             <div key={f.label} onClick={() => setActiveGroup(f.id)} style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center',
-              gap: '6px', cursor: 'pointer', flexShrink: 0
+              gap: '4px', cursor: 'pointer', flexShrink: 0
             }}>
               <div style={{
-                width: '64px', height: '64px', borderRadius: '18px',
+                width: '52px', height: '52px', borderRadius: '16px',
                 background: active ? `${f.id ? groupColors[f.id] : '#c8f55a'}20` : '#111',
                 border: `1.5px solid ${active ? (f.id ? groupColors[f.id] : '#c8f55a') : 'rgba(255,255,255,0.08)'}`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '26px', transition: 'all 0.15s'
+                fontSize: '20px', transition: 'all 0.15s'
               }}>{f.icon}</div>
               <span style={{
-                fontSize: '10px', fontWeight: active ? 600 : 400,
+                fontSize: '9px', fontWeight: active ? 600 : 400,
                 color: active ? (f.id ? groupColors[f.id] : '#c8f55a') : 'rgba(255,255,255,0.4)',
                 fontFamily: 'Inter, sans-serif'
               }}>{f.label}</span>
             </div>
           )
-        })}
+        }}
       </div>
 
       <div style={{ padding: '0 16px 12px', fontSize: '13px', color: 'rgba(255,255,255,0.3)' }}>
@@ -168,7 +168,7 @@ export default function Exercises() {
       </div>
 
       {/* Сетка */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', padding: '0 16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', padding: '0 16px' }}>
         {filtered.map(ex => {
           const color = groupColors[ex.muscle_group] || '#c8f55a'
           const isSelected = !!selected.find(e => e.id === ex.id)
@@ -233,10 +233,10 @@ export default function Exercises() {
               >{isSelected ? '✓' : '+'}</div>
 
               <div style={{
-                flex: 1,
+                height: '80px',
                 background: `linear-gradient(135deg, ${color}15 0%, #1a1a1a 100%)`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '50px', position: 'relative'
+                fontSize: '40px', position: 'relative'
               }}>
                 {muscleIcon(ex.muscle_group)}
                 {/* Фон эффект */}
@@ -252,20 +252,20 @@ export default function Exercises() {
                 }}/>
               </div>
               
-              <div style={{ padding: '14px', position: 'relative', zIndex: 2 }}>
+              <div style={{ padding: '12px', position: 'relative', zIndex: 2 }}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  marginBottom: '8px'
+                  marginBottom: '6px'
                 }}>
                   <div style={{
                     background: `${color}30`, border: `1px solid ${color}50`,
-                    borderRadius: '8px', padding: '4px 10px',
-                    fontSize: '11px', fontWeight: 700, color
+                    borderRadius: '8px', padding: '4px 8px',
+                    fontSize: '10px', fontWeight: 700, color
                   }}>{ex.muscle_group}</div>
                 </div>
-                <div style={{ fontSize: '14px', fontWeight: 600, lineHeight: 1.3, color: '#fff' }}>{ex.name}</div>
-                <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>
+                <div style={{ fontSize: '12px', fontWeight: 600, lineHeight: 1.3, color: '#fff' }}>{ex.name}</div>
+                <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>
                   Свободный вес
                 </div>
               </div>

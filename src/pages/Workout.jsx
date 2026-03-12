@@ -331,7 +331,7 @@ export default function Workout() {
         position: 'sticky', top: 0, zIndex: 50,
         background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.06)',
-        padding: '16px'
+        padding: '12px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
           <input
@@ -339,11 +339,11 @@ export default function Workout() {
             onChange={e => { setWorkoutName(e.target.value); saveToLocal(selectedExercises, e.target.value) }}
             style={{
               background: 'transparent', border: 'none', outline: 'none',
-              fontFamily: 'Playfair Display, serif', fontSize: '20px',
+              fontFamily: 'Playfair Display, serif', fontSize: '18px',
               color: '#fff', width: '180px'
             }}
           />
-          <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '32px', fontWeight: 700, color: '#c8f55a', letterSpacing: '-1px' }}>
+          <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '26px', fontWeight: 700, color: '#c8f55a', letterSpacing: '-1px' }}>
             {formatTime(elapsed)}
           </div>
         </div>
@@ -407,25 +407,25 @@ export default function Workout() {
               {isActive && (
                 <div style={{ padding: '0 16px 16px' }}>
                   {/* Заголовки */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '28px 1fr 1fr 40px 32px', gap: '8px', marginBottom: '8px' }}>
-                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>№</div>
-                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>КГ</div>
-                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>ПОВТ</div>
-                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>✓</div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '28px 1fr 1fr 36px 28px', gap: '8px', marginBottom: '8px' }}>
+                    <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>№</div>
+                    <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>КГ</div>
+                    <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>ПОВТ</div>
+                    <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>✓</div>
                     <div/>
                   </div>
 
                   {ex.sets.map((set, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '28px 1fr 1fr 40px 32px', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
-                      <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', textAlign: 'center' }}>{i + 1}</div>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '28px 1fr 1fr 36px 28px', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
+                      <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', textAlign: 'center' }}>{i + 1}</div>
                       <input
                         type="number" placeholder="0" value={set.weight}
                         onChange={e => updateSet(ex.id, i, 'weight', e.target.value)}
                         style={{
                           background: set.done ? 'rgba(200,245,90,0.08)' : 'rgba(255,255,255,0.06)',
                           border: `1px solid ${set.done ? 'rgba(200,245,90,0.2)' : 'rgba(255,255,255,0.08)'}`,
-                          borderRadius: '10px', padding: '10px', color: '#fff',
-                          fontSize: '15px', textAlign: 'center', outline: 'none',
+                          borderRadius: '8px', padding: '8px', color: '#fff',
+                          fontSize: '14px', textAlign: 'center', outline: 'none',
                           fontFamily: 'Inter, sans-serif'
                         }}
                       />
@@ -435,22 +435,22 @@ export default function Workout() {
                         style={{
                           background: set.done ? 'rgba(200,245,90,0.08)' : 'rgba(255,255,255,0.06)',
                           border: `1px solid ${set.done ? 'rgba(200,245,90,0.2)' : 'rgba(255,255,255,0.08)'}`,
-                          borderRadius: '10px', padding: '10px', color: '#fff',
-                          fontSize: '15px', textAlign: 'center', outline: 'none',
+                          borderRadius: '8px', padding: '8px', color: '#fff',
+                          fontSize: '14px', textAlign: 'center', outline: 'none',
                           fontFamily: 'Inter, sans-serif'
                         }}
                       />
                       <button
                         onClick={() => toggleSetDone(ex.id, i)}
                         style={{
-                          width: '40px', height: '40px', borderRadius: '10px',
+                          width: '36px', height: '36px', borderRadius: '8px',
                           background: set.done ? '#c8f55a' : 'rgba(255,255,255,0.06)',
-                          border: 'none', cursor: 'pointer', fontSize: '16px',
+                          border: 'none', cursor: 'pointer', fontSize: '14px',
                           color: set.done ? '#000' : 'rgba(255,255,255,0.3)'
                         }}>✓</button>
                       <button onClick={() => removeSet(ex.id, i)} style={{
                         background: 'transparent', border: 'none',
-                        color: 'rgba(255,255,255,0.2)', cursor: 'pointer', fontSize: '16px'
+                        color: 'rgba(255,255,255,0.2)', cursor: 'pointer', fontSize: '14px'
                       }}>✕</button>
                     </div>
                   ))}
@@ -485,18 +485,20 @@ export default function Workout() {
       {/* Кнопки внизу */}
       <div style={{ position: 'fixed', bottom: '80px', left: '16px', right: '16px', display: 'flex', gap: '10px', zIndex: 200 }}>
         <button onClick={cancelWorkout} style={{
+          width: '80px',
+          flex: 'none',
           background: 'rgba(255,92,92,0.1)', border: '1px solid rgba(255,92,92,0.2)',
-          borderRadius: '16px', padding: '16px', color: '#ff5c5c',
-          fontSize: '14px', fontWeight: 600, cursor: 'pointer',
+          borderRadius: '12px', padding: '12px 8px', color: '#ff5c5c',
+          fontSize: '12px', fontWeight: 600, cursor: 'pointer',
           fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'
         }}>Отменить</button>
         <button onClick={saveWorkout} disabled={saving} style={{
           flex: 1, background: saving ? 'rgba(200,245,90,0.5)' : '#c8f55a',
-          color: '#000', border: 'none', borderRadius: '16px', padding: '16px',
-          fontSize: '16px', fontWeight: 700, cursor: 'pointer',
+          color: '#000', border: 'none', borderRadius: '12px', padding: '12px',
+          fontSize: '14px', fontWeight: 700, cursor: 'pointer',
           fontFamily: 'Inter, sans-serif'
         }}>
-          {saving ? 'Сохраняем...' : `Завершить · ${formatTime(elapsed)}`}
+          {saving ? 'Сохраняем...' : `Завершить`}
         </button>
       </div>
 
