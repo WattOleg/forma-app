@@ -50,13 +50,28 @@ export default function Progress() {
   ]
 
   if (loading) return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'var(--bg)', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
+      paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)'
+    }}>
       <div style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Загрузка...</div>
     </div>
   )
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg)', padding: '24px 16px 100px' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'var(--bg)', 
+      paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
+      paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)',
+      paddingLeft: '16px',
+      paddingRight: '16px'
+    }}>
 
       {/* Хедер */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>

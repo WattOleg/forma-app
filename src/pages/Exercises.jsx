@@ -110,15 +110,28 @@ export default function Exercises() {
 }
 
   if (loading) return (
-    <div style={{ minHeight: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#000', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
+      paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)'
+    }}>
       <div style={{ color: 'rgba(255,255,255,0.3)' }}>Загрузка...</div>
     </div>
   )
 
   return (
-    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: '100px' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#000',
+      paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
+      paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)'
+    }}>
 
-      <div style={{ padding: '24px 16px 0' }}>
+      <div style={{ padding: '0 16px 0' }}>
         <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '28px', marginBottom: '16px' }}>
           Библиотека
         </div>

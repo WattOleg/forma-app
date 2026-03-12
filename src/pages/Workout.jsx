@@ -193,8 +193,13 @@ export default function Workout() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: '100px' }}>
-      <div style={{ padding: '24px 16px 0' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#000',
+      paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
+      paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)'
+    }}>
+      <div style={{ padding: '0 16px 0' }}>
         <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '28px', marginBottom: '8px' }}>
           План тренировки
         </div>
@@ -310,7 +315,18 @@ export default function Workout() {
 
   // Экран завершения
   if (step === 'done') return (
-    <div style={{ minHeight: '100vh', background: '#000', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', gap: '16px' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#000', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      padding: '24px',
+      paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
+      paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)',
+      gap: '16px' 
+    }}>
       <div style={{ fontSize: '64px' }}>🎉</div>
       <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '32px' }}>Готово!</div>
       <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.4)' }}>{workoutName} · {formatTime(elapsed)} · {totalSets} подходов</div>
@@ -324,14 +340,19 @@ export default function Workout() {
 
   // Активная тренировка
   return (
-    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: '100px' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#000',
+      paddingTop: 'calc(env(safe-area-inset-top, 44px) + 8px)',
+      paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)'
+    }}>
 
       {/* Хедер с таймером */}
       <div style={{
         position: 'sticky', top: 0, zIndex: 50,
         background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.06)',
-        padding: '12px'
+        padding: '12px 16px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
           <input

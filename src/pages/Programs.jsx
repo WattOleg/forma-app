@@ -208,8 +208,13 @@ export default function Programs() {
   // Экран редактирования программы
   if (editingProgram) {
     return (
-      <div style={{ minHeight: '100vh', background: '#000', paddingBottom: '100px' }}>
-        <div style={{ padding: '24px 16px 0' }}>
+      <div style={{ 
+        minHeight: '100vh', 
+        background: '#000',
+        paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
+        paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)'
+      }}>
+        <div style={{ padding: '0 16px 0' }}>
           <button
             onClick={() => setEditingProgram(null)}
             style={{
@@ -331,8 +336,13 @@ export default function Programs() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#000', paddingBottom: '100px' }}>
-      <div style={{ padding: '24px 16px 0' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#000',
+      paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
+      paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)'
+    }}>
+      <div style={{ padding: '0 16px 0' }}>
         <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '28px', marginBottom: '8px' }}>
           Программы
         </div>
