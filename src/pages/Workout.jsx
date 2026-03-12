@@ -437,7 +437,7 @@ export default function Workout() {
                   </div>
 
                   {ex.sets.map((set, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '28px 1fr 1fr 36px 28px', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '28px 1fr 1fr 40px 28px', gap: '8px', marginBottom: '10px', alignItems: 'center' }}>
                       <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', textAlign: 'center' }}>{i + 1}</div>
                       <input
                         type="number" placeholder="0" value={set.weight}
@@ -445,8 +445,8 @@ export default function Workout() {
                         style={{
                           background: set.done ? 'rgba(200,245,90,0.08)' : 'rgba(255,255,255,0.06)',
                           border: `1px solid ${set.done ? 'rgba(200,245,90,0.2)' : 'rgba(255,255,255,0.08)'}`,
-                          borderRadius: '8px', padding: '8px', color: '#fff',
-                          fontSize: '14px', textAlign: 'center', outline: 'none',
+                          borderRadius: '8px', padding: '10px 6px', color: '#fff',
+                          fontSize: '16px', textAlign: 'center', outline: 'none',
                           fontFamily: 'Inter, sans-serif'
                         }}
                       />
@@ -456,15 +456,15 @@ export default function Workout() {
                         style={{
                           background: set.done ? 'rgba(200,245,90,0.08)' : 'rgba(255,255,255,0.06)',
                           border: `1px solid ${set.done ? 'rgba(200,245,90,0.2)' : 'rgba(255,255,255,0.08)'}`,
-                          borderRadius: '8px', padding: '8px', color: '#fff',
-                          fontSize: '14px', textAlign: 'center', outline: 'none',
+                          borderRadius: '8px', padding: '10px 6px', color: '#fff',
+                          fontSize: '16px', textAlign: 'center', outline: 'none',
                           fontFamily: 'Inter, sans-serif'
                         }}
                       />
                       <button
                         onClick={() => toggleSetDone(ex.id, i)}
                         style={{
-                          width: '36px', height: '36px', borderRadius: '8px',
+                          width: '40px', height: '40px', borderRadius: '10px',
                           background: set.done ? '#c8f55a' : 'rgba(255,255,255,0.06)',
                           border: 'none', cursor: 'pointer', fontSize: '14px',
                           color: set.done ? '#000' : 'rgba(255,255,255,0.3)'

@@ -151,18 +151,20 @@ export default function Dashboard() {
         </div>
 
         {/* Stats */}
-        <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px', marginBottom: '24px' }}>
+        <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '12px', marginBottom: '24px', padding: '0 4px' }}>
           {[
             { label: 'Тренировок', value: workouts.length || '0', sub: 'всего записано', color: 'var(--accent)' },
             { label: 'Вес', value: bodyWeight ? `${bodyWeight.weight_kg}` : '—', sub: bodyWeight ? 'кг · последний замер' : 'не записан', color: 'var(--blue)' },
             { label: 'Серия', value: '0', sub: 'дней подряд', color: 'var(--purple)' },
           ].map((s) => (
             <div key={s.label} style={{
-              background: `linear-gradient(135deg, ${s.color}10 0%, rgba(255,255,255,0.02) 100%)`,
-              border: `1px solid ${s.color}25`,
-              borderRadius: '20px', padding: '24px', cursor: 'pointer',
-              boxShadow: 'var(--shadow-card)',
-              transition: 'all 0.3s',
+              background: '#050509',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '18px',
+              padding: '18px 16px',
+              cursor: 'pointer',
+              boxShadow: '0 0 0 1px rgba(255,255,255,0.02)',
+              transition: 'all 0.2s',
               position: 'relative',
               overflow: 'hidden'
             }}>
@@ -179,9 +181,9 @@ export default function Dashboard() {
               }}/>
               
               <div style={{ position: 'relative', zIndex: 2 }}>
-                <div style={{ fontSize: '12px', fontWeight: 500, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>{s.label}</div>
-                <div style={{ fontFamily: 'DM Serif Display, serif', fontSize: '36px', color: s.color, lineHeight: 1 }}>{s.value}</div>
-                <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>{s.sub}</div>
+                <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>{s.label}</div>
+                <div style={{ fontFamily: 'DM Serif Display, serif', fontSize: '34px', color: s.color, lineHeight: 1.05 }}>{s.value}</div>
+                <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>{s.sub}</div>
               </div>
             </div>
           ))}
