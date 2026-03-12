@@ -203,7 +203,7 @@ export default function Workout() {
         <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '28px', marginBottom: '8px' }}>
           План тренировки
         </div>
-        <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>
+        <div style={{ fontSize: '20px', color: '#c8f55a(32, 181, 10, 0.4)', marginBottom: '24px' }}>
           {plan.length > 0 ? `${plan.length} упражнений выбрано` : 'Добавь упражнения из библиотеки'}
         </div>
 
@@ -295,7 +295,7 @@ export default function Workout() {
       </div>
 
       {plan.length > 0 && (
-        <div style={{ position: 'fixed', bottom: '80px', left: '16px', right: '16px', zIndex: 200 }}>
+        <div style={{ position: 'fixed', bottom: '60px', left: '16px', right: '16px', zIndex: 200 }}>
           <button onClick={startFromPlan} style={{
             width: '100%', background: '#c8f55a', color: '#000',
             border: 'none', borderRadius: '16px', padding: '16px',
