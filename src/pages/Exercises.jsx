@@ -14,17 +14,17 @@ const muscleFilters = [
   { id: 'Пресс', label: 'Пресс', icon: '🔥' },
 ]
 
-// Цвета и градиенты как на скриншоте 4 (Библиотека)
+// Яркие градиенты и стили как на скриншоте 4 (верх карточки — сочный цвет, низ — тёмный)
 const groupStyles = {
-  'Грудь': { gradient: 'linear-gradient(225deg, #472C83 0%, #11201D 100%)', border: '#472C83', tagBg: '#29254A', tagColor: '#fff' },
-  'Спина': { gradient: 'linear-gradient(225deg, #1354B5 0%, #11201D 100%)', border: '#1354B5', tagBg: '#12355B', tagColor: '#fff' },
-  'Ноги': { gradient: 'linear-gradient(270deg, #667651 0%, #0D1A0D 100%)', border: 'rgba(211,244,101,0.5)', tagBg: '#30370C', tagColor: '#D2F756' },
-  'Плечи': { gradient: 'linear-gradient(225deg, #9E4104 0%, #11201D 100%)', border: '#9E4104', tagBg: '#4D2F13', tagColor: '#fff' },
-  'Трицепс': { gradient: 'linear-gradient(225deg, #A3095B 0%, #11201D 100%)', border: '#A3095B', tagBg: '#451833', tagColor: '#fff' },
-  'Бицепс': { gradient: 'linear-gradient(225deg, #036450 0%, #11201D 100%)', border: '#00C39A', tagBg: '#0A473A', tagColor: '#32FED4' },
-  'Пресс': { gradient: 'linear-gradient(225deg, #9B9714 0%, #11201D 100%)', border: '#9B9714', tagBg: '#323D1B', tagColor: '#fff' },
+  'Грудь': { gradient: 'linear-gradient(180deg, #5B3A9E 0%, #472C83 50%, #1a1525 100%)', border: '#472C83', tagBg: '#3d2f5c', tagColor: '#fff' },
+  'Спина': { gradient: 'linear-gradient(180deg, #1a6fd4 0%, #1354B5 50%, #0d2845 100%)', border: '#1354B5', tagBg: '#1e4978', tagColor: '#fff' },
+  'Ноги': { gradient: 'linear-gradient(180deg, #7d9354 0%, #667651 50%, #0D1A0D 100%)', border: '#8a9c5e', tagBg: '#3d4622', tagColor: '#D2F756' },
+  'Плечи': { gradient: 'linear-gradient(180deg, #c55206 0%, #9E4104 50%, #2a1808 100%)', border: '#9E4104', tagBg: '#5c3818', tagColor: '#fff' },
+  'Трицепс': { gradient: 'linear-gradient(180deg, #c00d6e 0%, #A3095B 50%, #2d0a1f 100%)', border: '#A3095B', tagBg: '#5c2042', tagColor: '#fff' },
+  'Бицепс': { gradient: 'linear-gradient(180deg, #04876a 0%, #036450 50%, #0d2a24 100%)', border: '#00C39A', tagBg: '#0d5c4a', tagColor: '#32FED4' },
+  'Пресс': { gradient: 'linear-gradient(180deg, #b5a91a 0%, #9B9714 50%, #2d2b0f 100%)', border: '#9B9714', tagBg: '#4a4720', tagColor: '#fff' },
 }
-const defaultStyle = { gradient: 'linear-gradient(225deg, #036450 0%, #11201D 100%)', border: '#00C39A', tagBg: '#0A473A', tagColor: '#32FED4' }
+const defaultStyle = { gradient: 'linear-gradient(180deg, #04876a 0%, #036450 50%, #0d2a24 100%)', border: '#00C39A', tagBg: '#0d5c4a', tagColor: '#32FED4' }
 
 // Для фильтров (иконки и подписи)
 const groupColors = {
@@ -188,7 +188,7 @@ export default function Exercises() {
         {filtered.length} упражнений{selected.length > 0 ? ` · ${selected.length} выбрано` : ''}
       </div>
 
-      {/* Сетка — карточки как на скриншоте 4 */}
+      {/* Сетка — карточки 1:1 как на скриншоте 4 */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '0 16px 100px' }}>
         {filtered.map(ex => {
           const style = groupStyles[ex.muscle_group] || defaultStyle
@@ -206,57 +206,70 @@ export default function Exercises() {
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '172px',
+                minHeight: '200px',
                 position: 'relative'
               }}
             >
-              {/* Верхняя полоса с градиентом и эмодзи */}
+              {/* Верх: яркий градиент на всю высоту блока + крупный эмодзи по центру */}
               <div style={{
                 background: style.gradient,
-                minHeight: '93px',
+                height: '110px',
+                flexShrink: 0,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 position: 'relative'
               }}>
-                <span style={{ fontSize: '50px', lineHeight: 1 }}>{icon}</span>
-                {/* Круглая кнопка + в правом верхнем углу */}
-                <button
-                  type="button"
+                <span style={{ fontSize: '52px', lineHeight: 1, flexShrink: 0 }}>{icon}</span>
+                {/* Круглая кнопка + (белый круг, тёмная обводка) — именно круг, не квадрат */}
+                <div
+                  role="button"
+                  tabIndex={0}
                   onClick={e => { e.stopPropagation(); toggleSelect(ex) }}
+                  onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSelect(ex) } }}
                   style={{
                     position: 'absolute',
-                    top: '10px',
-                    right: '10px',
-                    width: '28px',
-                    height: '28px',
+                    top: '8px',
+                    right: '8px',
+                    width: '32px',
+                    height: '32px',
                     borderRadius: '50%',
-                    background: isSelected ? '#c8f55a' : 'rgba(255,255,255,0.95)',
+                    background: isSelected ? '#c8f55a' : '#fff',
                     border: '1.5px solid #1a1a1a',
                     color: isSelected ? '#000' : '#1a1a1a',
-                    fontSize: '16px',
+                    fontSize: '18px',
                     fontWeight: 700,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     lineHeight: 1,
-                    boxShadow: '0 1px 4px rgba(0,0,0,0.3)'
+                    boxSizing: 'border-box',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.25)',
+                    flexShrink: 0
                   }}
-                >{isSelected ? '✓' : '+'}</button>
+                >{isSelected ? '✓' : '+'}</div>
               </div>
-              {/* Нижняя часть: тег, название, подпись */}
-              <div style={{ padding: '12px', flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {/* Низ: название, подпись, тег группы в правом нижнем углу */}
+              <div style={{
+                padding: '12px',
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+                background: '#090A05'
+              }}>
+                <span style={{ fontSize: '15px', fontWeight: 700, color: '#fff', lineHeight: 1.25 }}>{ex.name}</span>
+                <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)' }}>Свободный вес</span>
                 <span style={{
+                  marginTop: 'auto',
+                  alignSelf: 'flex-end',
                   fontSize: '12px',
                   color: style.tagColor,
                   background: style.tagBg,
                   padding: '4px 8px',
-                  borderRadius: '7px',
-                  alignSelf: 'flex-start'
+                  borderRadius: '8px'
                 }}>{ex.muscle_group}</span>
-                <span style={{ fontSize: '15px', fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>{ex.name}</span>
-                <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)' }}>Свободный вес</span>
               </div>
             </div>
           )
