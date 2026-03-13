@@ -301,7 +301,15 @@ export default function Programs() {
             ))}
           </div>
 
-          <div style={{ position: 'fixed', bottom: '80px', left: '16px', right: '16px', display: 'flex', gap: '10px', zIndex: 200 }}>
+          <div style={{ 
+            position: 'fixed', 
+            bottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 8px)', 
+            left: '16px', 
+            right: '16px', 
+            display: 'flex', 
+            gap: '10px', 
+            zIndex: 200 
+          }}>
             <button
               onClick={() => setEditingProgram(null)}
               style={{

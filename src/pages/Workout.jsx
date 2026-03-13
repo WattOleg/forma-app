@@ -426,7 +426,7 @@ export default function Workout() {
 
               {/* Подходы (раскрываются) */}
               {isActive && (
-                <div style={{ padding: '0 16px 16px' }}>
+                <div style={{ padding: '0 12px 16px', overflowX: 'auto' }}>
                   {/* Заголовки */}
                   <div style={{ display: 'grid', gridTemplateColumns: '28px 1fr 1fr 36px 28px', gap: '8px', marginBottom: '8px' }}>
                     <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', textAlign: 'center' }}>№</div>
@@ -437,7 +437,7 @@ export default function Workout() {
                   </div>
 
                   {ex.sets.map((set, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '28px 1fr 1fr 40px 28px', gap: '8px', marginBottom: '10px', alignItems: 'center' }}>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '28px minmax(0,1fr) minmax(0,1fr) 40px 28px', gap: '8px', marginBottom: '10px', alignItems: 'center', minWidth: '0' }}>
                       <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', textAlign: 'center' }}>{i + 1}</div>
                       <input
                         type="number" placeholder="0" value={set.weight}
@@ -504,7 +504,15 @@ export default function Workout() {
       </div>
 
       {/* Кнопки внизу */}
-      <div style={{ position: 'fixed', bottom: '80px', left: '16px', right: '16px', display: 'flex', gap: '10px', zIndex: 200 }}>
+      <div style={{ 
+        position: 'fixed', 
+        bottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 8px)', 
+        left: '16px', 
+        right: '16px', 
+        display: 'flex', 
+        gap: '10px', 
+        zIndex: 200 
+      }}>
         <button onClick={cancelWorkout} style={{
           width: '80px',
           flex: 'none',

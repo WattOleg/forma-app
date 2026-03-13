@@ -158,12 +158,12 @@ export default function Dashboard() {
             { label: 'Серия', value: '0', sub: 'дней подряд', color: 'var(--purple)' },
           ].map((s) => (
             <div key={s.label} style={{
-              background: '#050509',
-              border: '1px solid rgba(255,255,255,0.08)',
+              background: `linear-gradient(135deg, ${s.color}10 0%, rgba(5,5,10,1) 100%)`,
+              border: `1px solid ${s.color}30`,
               borderRadius: '18px',
               padding: '18px 16px',
               cursor: 'pointer',
-              boxShadow: '0 0 0 1px rgba(255,255,255,0.02)',
+              boxShadow: `0 12px 30px ${s.color}20`,
               transition: 'all 0.2s',
               position: 'relative',
               overflow: 'hidden'

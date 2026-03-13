@@ -295,18 +295,24 @@ export default function Exercises() {
 
       {/* Кнопка старт */}
       {selected.length > 0 && (
-  <div style={{ position: 'fixed', bottom: '80px', left: '16px', right: '16px', zIndex: 200 }}>
-    <button onClick={addToPlan} style={{
-      width: '100%', background: '#c8f55a', color: '#000',
-      border: 'none', borderRadius: '16px', padding: '16px',
-      fontSize: '16px', fontWeight: 700, cursor: 'pointer',
-      boxShadow: 'var(--shadow-xl)',
-      fontFamily: 'Inter, sans-serif'
-    }}>
-      Добавить в план · {selected.length} упр.
-    </button>
-  </div>
-)}
+        <div style={{ 
+          position: 'fixed', 
+          bottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 8px)', 
+          left: '16px', 
+          right: '16px', 
+          zIndex: 200 
+        }}>
+          <button onClick={addToPlan} style={{
+            width: '100%', background: '#c8f55a', color: '#000',
+            border: 'none', borderRadius: '16px', padding: '14px',
+            fontSize: '15px', fontWeight: 700, cursor: 'pointer',
+            boxShadow: 'var(--shadow-xl)',
+            fontFamily: 'Inter, sans-serif'
+          }}>
+            Добавить в план · {selected.length} упр.
+          </button>
+        </div>
+      )}
 
       <BottomNav />
     </div>
