@@ -573,6 +573,11 @@ button:hover {
   box-shadow: var(--shadow-hover) !important;
 }
 
+/* Поиск на экране упражнений — placeholder цвет */
+.exercise-search-input::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
 /* Базовые карточки */
 div[style*="borderRadius: '20px'"] {
   box-shadow: var(--shadow-card) !important;

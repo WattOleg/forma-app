@@ -14,17 +14,17 @@ const muscleFilters = [
   { id: 'Пресс', label: 'Пресс', icon: '🔥' },
 ]
 
-// Яркие градиенты и стили как на скриншоте 4 (верх карточки — сочный цвет, низ — тёмный)
+// Градиенты и стили карточек как в финальном макете ExerciseLibrary
 const groupStyles = {
-  'Грудь': { gradient: 'linear-gradient(180deg, #5B3A9E 0%, #472C83 50%, #1a1525 100%)', border: '#472C83', tagBg: '#3d2f5c', tagColor: '#fff' },
-  'Спина': { gradient: 'linear-gradient(180deg, #1a6fd4 0%, #1354B5 50%, #0d2845 100%)', border: '#1354B5', tagBg: '#1e4978', tagColor: '#fff' },
-  'Ноги': { gradient: 'linear-gradient(180deg, #7d9354 0%, #667651 50%, #0D1A0D 100%)', border: '#8a9c5e', tagBg: '#3d4622', tagColor: '#D2F756' },
-  'Плечи': { gradient: 'linear-gradient(180deg, #c55206 0%, #9E4104 50%, #2a1808 100%)', border: '#9E4104', tagBg: '#5c3818', tagColor: '#fff' },
-  'Трицепс': { gradient: 'linear-gradient(180deg, #c00d6e 0%, #A3095B 50%, #2d0a1f 100%)', border: '#A3095B', tagBg: '#5c2042', tagColor: '#fff' },
-  'Бицепс': { gradient: 'linear-gradient(180deg, #04876a 0%, #036450 50%, #0d2a24 100%)', border: '#00C39A', tagBg: '#0d5c4a', tagColor: '#32FED4' },
-  'Пресс': { gradient: 'linear-gradient(180deg, #b5a91a 0%, #9B9714 50%, #2d2b0f 100%)', border: '#9B9714', tagBg: '#4a4720', tagColor: '#fff' },
+  'Ноги':    { gradient: 'linear-gradient(225deg, #2D1A5A 0%, #11201D 100%)', border: '#472C83', tagBg: '#2D1A5A', tagColor: '#A855F7' },
+  'Бицепс':  { gradient: 'linear-gradient(225deg, #036450 0%, #11201D 100%)', border: '#00C39A', tagBg: '#0A473A', tagColor: '#32FED4' },
+  'Грудь':   { gradient: 'linear-gradient(225deg, #472C83 0%, #11201D 100%)', border: '#472C83', tagBg: '#29254A', tagColor: '#ffffff' },
+  'Плечи':   { gradient: 'linear-gradient(225deg, #9E4104 0%, #11201D 100%)', border: '#9E4104', tagBg: '#4D2F13', tagColor: '#ffffff' },
+  'Спина':   { gradient: 'linear-gradient(225deg, #1354B5 0%, #11201D 100%)', border: '#1354B5', tagBg: '#12355B', tagColor: '#ffffff' },
+  'Трицепс': { gradient: 'linear-gradient(225deg, #A3095B 0%, #11201D 100%)', border: '#A3095B', tagBg: '#451833', tagColor: '#ffffff' },
+  'Пресс':   { gradient: 'linear-gradient(225deg, #9B9714 0%, #11201D 100%)', border: '#9B9714', tagBg: '#323D1B', tagColor: '#ffffff' },
 }
-const defaultStyle = { gradient: 'linear-gradient(180deg, #04876a 0%, #036450 50%, #0d2a24 100%)', border: '#00C39A', tagBg: '#0d5c4a', tagColor: '#32FED4' }
+const defaultStyle = { gradient: 'linear-gradient(225deg, #036450 0%, #11201D 100%)', border: '#00C39A', tagBg: '#0A473A', tagColor: '#32FED4' }
 
 // Для фильтров (иконки и подписи)
 const groupColors = {
@@ -120,7 +120,7 @@ export default function Exercises() {
   if (loading) return (
     <div style={{ 
       minHeight: '100vh', 
-      background: '#000', 
+      background: '#0D0D0D', 
       display: 'flex', 
       alignItems: 'center', 
       justifyContent: 'center',
@@ -134,31 +134,45 @@ export default function Exercises() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: '#000',
+      background: '#0D0D0D',
       paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
       paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)'
     }}>
 
       <div style={{ padding: '0 16px 0' }}>
-        <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '28px', marginBottom: '16px' }}>
+        <div style={{ 
+          fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont', 
+          fontSize: '24px', 
+          fontWeight: 700,
+          color: '#D3F465',
+          marginTop: '44px',
+          marginBottom: '16px'
+        }}>
           Библиотека
         </div>
         <input
-          placeholder="Поиск упражнения..."
+          placeholder="Поиск упражнения...."
           value={search}
           onChange={e => setSearch(e.target.value)}
+          className="exercise-search-input"
           style={{
-            width: '100%', background: '#111',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '12px', padding: '12px 16px',
-            color: '#fff', fontSize: '14px', outline: 'none',
-            fontFamily: 'Inter, sans-serif', boxSizing: 'border-box',
+            width: '100%',
+            height: '44px',
+            background: '#1F1E1E',
+            border: '1px solid rgba(201,201,201,0.5)',
+            borderRadius: '15px',
+            padding: '0 16px',
+            color: '#ffffff',
+            fontSize: '18px',
+            outline: 'none',
+            fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont',
+            boxSizing: 'border-box',
             marginBottom: '16px'
           }}
         />
       </div>
 
-      {/* Фильтры — верхний бар с группами мышц (по макету .box/.img) */}
+      {/* Фильтры — верхний бар с группами мышц */}
       <div style={{ 
         display: 'flex', 
         alignItems: 'flex-start',
@@ -166,8 +180,7 @@ export default function Exercises() {
         overflowX: 'auto', 
         padding: '4px 16px 16px', 
         scrollbarWidth: 'none', 
-        WebkitOverflowScrolling: 'touch',
-        minWidth: '480px'
+        WebkitOverflowScrolling: 'touch'
       }}>
         {muscleFilters.map(f => {
           const active = activeGroup === f.id
@@ -177,28 +190,38 @@ export default function Exercises() {
               gap: '4px', cursor: 'pointer', flexShrink: 0
             }}>
               <div style={{
-                width: '44px', height: '44px', borderRadius: '16px',
-                background: active ? `${f.id ? groupColors[f.id] : '#c8f55a'}20` : '#111',
-                border: `1.5px solid ${active ? (f.id ? groupColors[f.id] : '#c8f55a') : 'rgba(255,255,255,0.08)'}`,
+                width: '52px', height: '52px', borderRadius: '15px',
+                background: active ? '#191E0A' : '#1F1E1E',
+                border: active 
+                  ? '1px solid #E7F89A' 
+                  : '1px solid rgba(179,179,179,0.2)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '18px', transition: 'all 0.15s'
+                fontSize: '29px', transition: 'all 0.15s'
               }}>{f.icon}</div>
               <span style={{
-                fontSize: '9px', fontWeight: active ? 600 : 400,
-                color: active ? (f.id ? groupColors[f.id] : '#c8f55a') : 'rgba(255,255,255,0.4)',
-                fontFamily: 'Inter, sans-serif'
+                fontSize: '10px',
+                fontWeight: 400,
+                color: '#D3F465',
+                fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont'
               }}>{f.label}</span>
             </div>
           )
         })}
       </div>
 
-      <div style={{ padding: '0 16px 12px', fontSize: '13px', color: 'rgba(255,255,255,0.3)' }}>
-        {filtered.length} упражнений{selected.length > 0 ? ` · ${selected.length} выбрано` : ''}
+      <div style={{ padding: '0 16px 12px', fontSize: '13px', color: '#777777', fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont' }}>
+        {filtered.length} упражнения{selected.length > 0 ? ` · ${selected.length} выбрано` : ''}
       </div>
 
-      {/* Сетка — карточки 172×172px как в Figma (.box) */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '0 16px 100px' }}>
+      {/* Сетка — карточки 172×172px как в макете */}
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(2, 172px)', 
+        justifyContent: 'space-between',
+        rowGap: '12px',
+        columnGap: '12px',
+        padding: '0 16px 100px' 
+      }}>
         {filtered.map(ex => {
           const style = groupStyles[ex.muscle_group] || defaultStyle
           const isSelected = !!selected.find(e => e.id === ex.id)
@@ -215,12 +238,12 @@ export default function Exercises() {
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
-                width: '100%',
+                width: '172px',
                 height: '172px',
                 position: 'relative'
               }}
             >
-              {/* Верх: градиент + эмодзи (93px как ~половина 172) */}
+              {/* Верх: градиент + эмодзи (160x93) */}
               <div style={{
                 background: style.gradient,
                 height: '93px',
@@ -241,14 +264,14 @@ export default function Exercises() {
                     position: 'absolute',
                     top: '8px',
                     right: '8px',
-                    width: '32px',
-                    height: '32px',
+                    width: '14px',
+                    height: '14px',
                     borderRadius: '50%',
-                    background: isSelected ? '#c8f55a' : '#fff',
-                    border: '1.5px solid #1a1a1a',
-                    color: isSelected ? '#000' : '#1a1a1a',
-                    fontSize: '18px',
-                    fontWeight: 700,
+                    background: isSelected ? '#c8f55a' : 'transparent',
+                    border: '1.5px solid #FAFAFA',
+                    color: '#FAFAFA',
+                    fontSize: '10px',
+                    fontWeight: 600,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -269,8 +292,8 @@ export default function Exercises() {
                 gap: '4px',
                 background: '#090A05'
               }}>
-                <span style={{ fontFamily: '"Jomhuria", serif', fontSize: '15px', fontWeight: 400, color: '#fff', lineHeight: 1.25 }}>{ex.name}</span>
-                <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)' }}>Свободный вес</span>
+                <span style={{ fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont', fontSize: '15px', fontWeight: 700, color: '#ffffff', lineHeight: 1.25 }}>{ex.name}</span>
+                <span style={{ fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont', fontSize: '10px', color: 'rgba(255,255,255,0.5)' }}>{ex.equipment || 'Свободный вес'}</span>
                 <span style={{
                   marginTop: 'auto',
                   alignSelf: 'flex-end',
@@ -278,7 +301,11 @@ export default function Exercises() {
                   color: style.tagColor,
                   background: style.tagBg,
                   padding: '4px 8px',
-                  borderRadius: '8px'
+                  borderRadius: '7px',
+                  height: '19px',
+                  border: '0.5px solid rgba(255,255,255,0.5)',
+                  display: 'inline-flex',
+                  alignItems: 'center'
                 }}>{ex.muscle_group}</span>
               </div>
             </div>
