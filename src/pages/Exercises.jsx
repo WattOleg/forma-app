@@ -158,8 +158,17 @@ export default function Exercises() {
         />
       </div>
 
-      {/* Фильтры */}
-      <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', padding: '4px 16px 16px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+      {/* Фильтры — верхний бар с группами мышц (по макету .box/.img) */}
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'flex-start',
+        gap: '8px', 
+        overflowX: 'auto', 
+        padding: '4px 16px 16px', 
+        scrollbarWidth: 'none', 
+        WebkitOverflowScrolling: 'touch',
+        minWidth: '480px'
+      }}>
         {muscleFilters.map(f => {
           const active = activeGroup === f.id
           return (
@@ -168,11 +177,11 @@ export default function Exercises() {
               gap: '4px', cursor: 'pointer', flexShrink: 0
             }}>
               <div style={{
-                width: '52px', height: '52px', borderRadius: '16px',
+                width: '44px', height: '44px', borderRadius: '16px',
                 background: active ? `${f.id ? groupColors[f.id] : '#c8f55a'}20` : '#111',
                 border: `1.5px solid ${active ? (f.id ? groupColors[f.id] : '#c8f55a') : 'rgba(255,255,255,0.08)'}`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '20px', transition: 'all 0.15s'
+                fontSize: '18px', transition: 'all 0.15s'
               }}>{f.icon}</div>
               <span style={{
                 fontSize: '9px', fontWeight: active ? 600 : 400,
@@ -188,7 +197,7 @@ export default function Exercises() {
         {filtered.length} упражнений{selected.length > 0 ? ` · ${selected.length} выбрано` : ''}
       </div>
 
-      {/* Сетка — карточки 1:1 как на скриншоте 4 */}
+      {/* Сетка — карточки 172×172px как в Figma (.box) */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '0 16px 100px' }}>
         {filtered.map(ex => {
           const style = groupStyles[ex.muscle_group] || defaultStyle
@@ -206,14 +215,15 @@ export default function Exercises() {
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '200px',
+                width: '100%',
+                height: '172px',
                 position: 'relative'
               }}
             >
-              {/* Верх: яркий градиент на всю высоту блока + крупный эмодзи по центру */}
+              {/* Верх: градиент + эмодзи (93px как ~половина 172) */}
               <div style={{
                 background: style.gradient,
-                height: '110px',
+                height: '93px',
                 flexShrink: 0,
                 display: 'flex',
                 alignItems: 'center',
@@ -259,7 +269,7 @@ export default function Exercises() {
                 gap: '4px',
                 background: '#090A05'
               }}>
-                <span style={{ fontSize: '15px', fontWeight: 700, color: '#fff', lineHeight: 1.25 }}>{ex.name}</span>
+                <span style={{ fontFamily: '"Jomhuria", serif', fontSize: '15px', fontWeight: 400, color: '#fff', lineHeight: 1.25 }}>{ex.name}</span>
                 <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)' }}>Свободный вес</span>
                 <span style={{
                   marginTop: 'auto',
