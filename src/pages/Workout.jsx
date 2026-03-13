@@ -199,11 +199,11 @@ export default function Workout() {
       paddingTop: 'calc(env(safe-area-inset-top, 44px) + 16px)',
       paddingBottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 16px)'
     }}>
-      <div style={{ padding: '0 16px 0' }}>
+      <div style={{ padding: '0 16px', paddingBottom: plan.length > 0 ? '100px' : 0 }}>
         <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '28px', marginBottom: '8px' }}>
           План тренировки
         </div>
-        <div style={{ fontSize: '20px', color: '#c8f55a(32, 181, 10, 0.4)', marginBottom: '24px' }}>
+        <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)', marginBottom: '24px' }}>
           {plan.length > 0 ? `${plan.length} упражнений выбрано` : 'Добавь упражнения из библиотеки'}
         </div>
 
@@ -295,7 +295,13 @@ export default function Workout() {
       </div>
 
       {plan.length > 0 && (
-        <div style={{ position: 'fixed', bottom: '60px', left: '16px', right: '16px', zIndex: 200 }}>
+        <div style={{
+          position: 'fixed',
+          bottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 12px)',
+          left: '16px',
+          right: '16px',
+          zIndex: 200
+        }}>
           <button onClick={startFromPlan} style={{
             width: '100%', background: '#c8f55a', color: '#000',
             border: 'none', borderRadius: '16px', padding: '16px',
@@ -503,10 +509,10 @@ export default function Workout() {
         }}>+ Добавить упражнение</button>
       </div>
 
-      {/* Кнопки внизу */}
+      {/* Кнопки внизу — выше нижнего бара */}
       <div style={{ 
         position: 'fixed', 
-        bottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 8px)', 
+        bottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 12px)', 
         left: '16px', 
         right: '16px', 
         display: 'flex', 

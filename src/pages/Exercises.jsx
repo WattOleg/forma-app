@@ -14,14 +14,22 @@ const muscleFilters = [
   { id: 'Пресс', label: 'Пресс', icon: '🔥' },
 ]
 
+// Цвета и градиенты как на скриншоте 4 (Библиотека)
+const groupStyles = {
+  'Грудь': { gradient: 'linear-gradient(225deg, #472C83 0%, #11201D 100%)', border: '#472C83', tagBg: '#29254A', tagColor: '#fff' },
+  'Спина': { gradient: 'linear-gradient(225deg, #1354B5 0%, #11201D 100%)', border: '#1354B5', tagBg: '#12355B', tagColor: '#fff' },
+  'Ноги': { gradient: 'linear-gradient(270deg, #667651 0%, #0D1A0D 100%)', border: 'rgba(211,244,101,0.5)', tagBg: '#30370C', tagColor: '#D2F756' },
+  'Плечи': { gradient: 'linear-gradient(225deg, #9E4104 0%, #11201D 100%)', border: '#9E4104', tagBg: '#4D2F13', tagColor: '#fff' },
+  'Трицепс': { gradient: 'linear-gradient(225deg, #A3095B 0%, #11201D 100%)', border: '#A3095B', tagBg: '#451833', tagColor: '#fff' },
+  'Бицепс': { gradient: 'linear-gradient(225deg, #036450 0%, #11201D 100%)', border: '#00C39A', tagBg: '#0A473A', tagColor: '#32FED4' },
+  'Пресс': { gradient: 'linear-gradient(225deg, #9B9714 0%, #11201D 100%)', border: '#9B9714', tagBg: '#323D1B', tagColor: '#fff' },
+}
+const defaultStyle = { gradient: 'linear-gradient(225deg, #036450 0%, #11201D 100%)', border: '#00C39A', tagBg: '#0A473A', tagColor: '#32FED4' }
+
+// Для фильтров (иконки и подписи)
 const groupColors = {
-  'Грудь': '#c8f55a',
-  'Спина': '#5c9eff',
-  'Ноги': '#a855f7',
-  'Плечи': '#ff9f5a',
-  'Трицепс': '#ff5c5c',
-  'Бицепс': '#5affea',
-  'Пресс': '#ffd95a',
+  'Грудь': '#a78bfa', 'Спина': '#5c9eff', 'Ноги': '#c8f55a', 'Плечи': '#ff9f5a',
+  'Трицепс': '#ff5c5c', 'Бицепс': '#5affea', 'Пресс': '#ffd95a'
 }
 
 const muscleIcon = (group) => {
@@ -180,107 +188,75 @@ export default function Exercises() {
         {filtered.length} упражнений{selected.length > 0 ? ` · ${selected.length} выбрано` : ''}
       </div>
 
-      {/* Сетка */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', padding: '0 16px' }}>
+      {/* Сетка — карточки как на скриншоте 4 */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '0 16px 100px' }}>
         {filtered.map(ex => {
-          const color = groupColors[ex.muscle_group] || '#c8f55a'
+          const style = groupStyles[ex.muscle_group] || defaultStyle
           const isSelected = !!selected.find(e => e.id === ex.id)
+          const icon = muscleIcon(ex.muscle_group)
           return (
-            <div 
-              key={ex.id} 
-              onClick={() => toggleSelect(ex)} 
+            <div
+              key={ex.id}
+              onClick={() => toggleSelect(ex)}
               style={{
-                background: `linear-gradient(135deg, ${color}10 0%, rgba(255,255,255,0.02) 100%)`,
-                border: `1px solid ${color}25`,
-                borderRadius: '20px', 
+                background: '#090A05',
+                border: `1px solid ${style.border}`,
+                borderRadius: '15px',
                 overflow: 'hidden',
-                cursor: 'pointer', 
-                transition: 'all 0.3s',
-                position: 'relative',
-                boxShadow: `var(--shadow-card), ${color}08 0 0 20px`,
-                minHeight: '200px',
+                cursor: 'pointer',
                 display: 'flex',
-                flexDirection: 'column'
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.boxShadow = `var(--shadow-hover), ${color}15 0 0 20px`
-                e.currentTarget.style.transform = 'translateY(-4px)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.boxShadow = `var(--shadow-card), ${color}08 0 0 20px`
-                e.currentTarget.style.transform = 'translateY(0)'
+                flexDirection: 'column',
+                minHeight: '172px',
+                position: 'relative'
               }}
             >
-              {/* Плюсик в углу */}
+              {/* Верхняя полоса с градиентом и эмодзи */}
               <div style={{
-                position: 'absolute',
-                top: '12px',
-                right: '12px',
-                zIndex: 10,
-                width: '36px', 
-                height: '36px', 
-                borderRadius: '50%',
-                background: isSelected ? color : 'rgba(255,255,255,0.1)',
-                display: 'flex', 
-                alignItems: 'center', 
+                background: style.gradient,
+                minHeight: '93px',
+                display: 'flex',
+                alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '18px', 
-                color: isSelected ? '#000' : '#fff',
-                fontWeight: 700, 
-                transition: 'all 0.2s',
-                border: isSelected ? `1px solid ${color}` : '1px solid rgba(255,255,255,0.15)',
-                cursor: 'pointer',
-                boxShadow: 'var(--shadow-md)'
-              }}
-              onClick={() => toggleSelect(ex)}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = color
-                e.currentTarget.style.color = '#000'
-                e.currentTarget.style.boxShadow = 'var(--shadow-hover)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = isSelected ? color : 'rgba(255,255,255,0.1)'
-                e.currentTarget.style.color = isSelected ? '#000' : '#fff'
-                e.currentTarget.style.boxShadow = 'var(--shadow-md)'
-              }}
-              >{isSelected ? '✓' : '+'}</div>
-
-              <div style={{
-                height: '80px',
-                background: `linear-gradient(135deg, ${color}15 0%, #1a1a1a 100%)`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '40px', position: 'relative'
+                position: 'relative'
               }}>
-                {muscleIcon(ex.muscle_group)}
-                {/* Фон эффект */}
-                <div style={{
-                  position: 'absolute',
-                  top: -40,
-                  right: -40,
-                  width: '140px',
-                  height: '140px',
-                  background: `radial-gradient(circle, ${color}20 0%, transparent 70%)`,
-                  borderRadius: '50%',
-                  pointerEvents: 'none'
-                }}/>
+                <span style={{ fontSize: '50px', lineHeight: 1 }}>{icon}</span>
+                {/* Круглая кнопка + в правом верхнем углу */}
+                <button
+                  type="button"
+                  onClick={e => { e.stopPropagation(); toggleSelect(ex) }}
+                  style={{
+                    position: 'absolute',
+                    top: '10px',
+                    right: '10px',
+                    width: '28px',
+                    height: '28px',
+                    borderRadius: '50%',
+                    background: isSelected ? '#c8f55a' : 'rgba(255,255,255,0.95)',
+                    border: '1.5px solid #1a1a1a',
+                    color: isSelected ? '#000' : '#1a1a1a',
+                    fontSize: '16px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    lineHeight: 1,
+                    boxShadow: '0 1px 4px rgba(0,0,0,0.3)'
+                  }}
+                >{isSelected ? '✓' : '+'}</button>
               </div>
-              
-              <div style={{ padding: '12px', position: 'relative', zIndex: 2 }}>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  marginBottom: '6px'
-                }}>
-                  <div style={{
-                    background: `${color}30`, border: `1px solid ${color}50`,
-                    borderRadius: '8px', padding: '4px 8px',
-                    fontSize: '10px', fontWeight: 700, color
-                  }}>{ex.muscle_group}</div>
-                </div>
-                <div style={{ fontSize: '12px', fontWeight: 600, lineHeight: 1.3, color: '#fff' }}>{ex.name}</div>
-                <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>
-                  Свободный вес
-                </div>
+              {/* Нижняя часть: тег, название, подпись */}
+              <div style={{ padding: '12px', flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <span style={{
+                  fontSize: '12px',
+                  color: style.tagColor,
+                  background: style.tagBg,
+                  padding: '4px 8px',
+                  borderRadius: '7px',
+                  alignSelf: 'flex-start'
+                }}>{ex.muscle_group}</span>
+                <span style={{ fontSize: '15px', fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>{ex.name}</span>
+                <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)' }}>Свободный вес</span>
               </div>
             </div>
           )
@@ -297,7 +273,7 @@ export default function Exercises() {
       {selected.length > 0 && (
         <div style={{ 
           position: 'fixed', 
-          bottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 8px)', 
+          bottom: 'calc(83px + env(safe-area-inset-bottom, 34px) + 12px)', 
           left: '16px', 
           right: '16px', 
           zIndex: 200 
