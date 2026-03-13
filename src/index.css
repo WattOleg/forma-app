@@ -1,8 +1,78 @@
+/* Forma UI v2 — градиентные карточки дашборда */
 @import '@fontsource/dm-sans/300.css';
 @import '@fontsource/dm-sans/400.css';
 @import '@fontsource/dm-sans/500.css';
 @import '@fontsource/dm-serif-display/400.css';
 @import '@fontsource/dm-serif-display/400-italic.css';
+
+/* v2: градиентные карточки дашборда — всегда применяются */
+.dashboard-stat-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  padding: 18px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.dashboard-stat-card--accent {
+  background: linear-gradient(135deg, rgba(200,245,90,0.15) 0%, rgba(5,5,15,1) 100%);
+  border-color: rgba(200,245,90,0.35);
+  box-shadow: 0 12px 30px rgba(200,245,90,0.12);
+}
+.dashboard-stat-card--blue {
+  background: linear-gradient(135deg, rgba(92,158,255,0.15) 0%, rgba(5,5,15,1) 100%);
+  border-color: rgba(92,158,255,0.35);
+  box-shadow: 0 12px 30px rgba(92,158,255,0.12);
+}
+.dashboard-stat-card--purple {
+  background: linear-gradient(135deg, rgba(167,139,250,0.15) 0%, rgba(5,5,15,1) 100%);
+  border-color: rgba(167,139,250,0.35);
+  box-shadow: 0 12px 30px rgba(167,139,250,0.12);
+}
+.dashboard-stat-card__glow {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.dashboard-stat-card--accent .dashboard-stat-card__glow {
+  background: radial-gradient(circle, rgba(200,245,90,0.2) 0%, transparent 70%);
+}
+.dashboard-stat-card--blue .dashboard-stat-card__glow {
+  background: radial-gradient(circle, rgba(92,158,255,0.2) 0%, transparent 70%);
+}
+.dashboard-stat-card--purple .dashboard-stat-card__glow {
+  background: radial-gradient(circle, rgba(167,139,250,0.2) 0%, transparent 70%);
+}
+.dashboard-stat-card__content {
+  position: relative;
+  z-index: 2;
+}
+.dashboard-stat-card__label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.dashboard-stat-card__value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 34px;
+  line-height: 1.05;
+}
+.dashboard-stat-card__value--accent { color: #c8f55a; }
+.dashboard-stat-card__value--blue { color: #5c9eff; }
+.dashboard-stat-card__value--purple { color: #a78bfa; }
+.dashboard-stat-card__sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -115,7 +185,7 @@ font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 12px !important;
   }
 
-  /* === STATS GRID === */
+  /* === STATS GRID (градиентные карточки) === */
   .stats-grid {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
@@ -127,16 +197,26 @@ font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     border-radius: 16px !important;
   }
 
-  .stats-grid > div > div:first-child > div:first-child {
+  /* сохраняем градиент и обводку карточек на мобильном */
+  .dashboard-stat-card.dashboard-stat-card--accent,
+  .dashboard-stat-card.dashboard-stat-card--blue,
+  .dashboard-stat-card.dashboard-stat-card--purple {
+    min-height: 100px;
+  }
+
+  .stats-grid > div > div:first-child > div:first-child,
+  .dashboard-stat-card__label {
     font-size: 11px !important;
     margin-bottom: 10px !important;
   }
 
-  .stats-grid > div > div:first-child > div:nth-child(2) {
+  .stats-grid > div > div:first-child > div:nth-child(2),
+  .dashboard-stat-card__value {
     font-size: 32px !important;
   }
 
-  .stats-grid > div > div:first-child > div:last-child {
+  .stats-grid > div > div:first-child > div:last-child,
+  .dashboard-stat-card__sub {
     font-size: 12px !important;
     margin-top: 6px !important;
   }

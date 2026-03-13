@@ -150,40 +150,19 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Stats */}
+        {/* Stats — градиентные карточки (стили в index.css по классу .dashboard-stat-card) */}
         <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '12px', marginBottom: '24px', padding: '0 4px' }}>
           {[
-            { label: 'Тренировок', value: workouts.length || '0', sub: 'всего записано', color: 'var(--accent)' },
-            { label: 'Вес', value: bodyWeight ? `${bodyWeight.weight_kg}` : '—', sub: bodyWeight ? 'кг · последний замер' : 'не записан', color: 'var(--blue)' },
-            { label: 'Серия', value: '0', sub: 'дней подряд', color: 'var(--purple)' },
+            { label: 'Тренировок', value: workouts.length || '0', sub: 'всего записано', colorKey: 'accent' },
+            { label: 'Вес', value: bodyWeight ? `${bodyWeight.weight_kg}` : '—', sub: bodyWeight ? 'кг · последний замер' : 'не записан', colorKey: 'blue' },
+            { label: 'Серия', value: '0', sub: 'дней подряд', colorKey: 'purple' },
           ].map((s) => (
-            <div key={s.label} style={{
-              background: `linear-gradient(135deg, ${s.color}10 0%, rgba(5,5,10,1) 100%)`,
-              border: `1px solid ${s.color}30`,
-              borderRadius: '18px',
-              padding: '18px 16px',
-              cursor: 'pointer',
-              boxShadow: `0 12px 30px ${s.color}20`,
-              transition: 'all 0.2s',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              {/* Фон эффект */}
-              <div style={{
-                position: 'absolute',
-                top: -40,
-                right: -40,
-                width: '120px',
-                height: '120px',
-                background: `radial-gradient(circle, ${s.color}15 0%, transparent 70%)`,
-                borderRadius: '50%',
-                pointerEvents: 'none'
-              }}/>
-              
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>{s.label}</div>
-                <div style={{ fontFamily: 'DM Serif Display, serif', fontSize: '34px', color: s.color, lineHeight: 1.05 }}>{s.value}</div>
-                <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>{s.sub}</div>
+            <div key={s.label} className={`dashboard-stat-card dashboard-stat-card--${s.colorKey}`} data-color={s.colorKey}>
+              <div className="dashboard-stat-card__glow" aria-hidden />
+              <div className="dashboard-stat-card__content">
+                <div className="dashboard-stat-card__label">{s.label}</div>
+                <div className={`dashboard-stat-card__value dashboard-stat-card__value--${s.colorKey}`}>{s.value}</div>
+                <div className="dashboard-stat-card__sub">{s.sub}</div>
               </div>
             </div>
           ))}
